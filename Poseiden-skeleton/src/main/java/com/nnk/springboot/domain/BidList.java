@@ -1,5 +1,6 @@
 package com.nnk.springboot.domain;
 
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Required;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import javax.validation.constraints.NotBlank;
 import java.sql.Date;
 import java.sql.Timestamp;
 
+@Data
 @Entity
 @Table(name = "bidlist")
 public class BidList {
@@ -24,17 +26,17 @@ public class BidList {
     private Double ask;
     private String benchmark;
     private Timestamp bidListDate;
-    String commentary;
-    String security;
-    String status;
-    String trader;
-    String book;
-    String creationName;
-    Timestamp creationDate;
-    String revisionName;
-    Timestamp revisionDate;
-    String dealName;
-    String dealType;
-    String sourceListId;
-    String side;
+    private String commentary;
+    private String security;
+    private String status;
+    private String trader;
+    private String book;
+    private String creationName;
+    private Timestamp creationDate;
+    private String revisionName;
+    private Timestamp revisionDate;
+    private String dealName;
+    private String dealType;
+    private String sourceListId;
+    private String side;
 }
