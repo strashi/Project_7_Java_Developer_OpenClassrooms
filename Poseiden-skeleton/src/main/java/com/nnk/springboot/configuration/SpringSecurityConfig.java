@@ -15,11 +15,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("*/list").hasAnyAuthority("USER")
                 .antMatchers("*/add","*/update").hasAnyAuthority("ADMIN")
-                .antMatchers("/login","/home").permitAll()
+                .antMatchers("/login","/").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/home")
+                .loginPage("/login")
                 .and()
                 .logout()
                 .permitAll();
