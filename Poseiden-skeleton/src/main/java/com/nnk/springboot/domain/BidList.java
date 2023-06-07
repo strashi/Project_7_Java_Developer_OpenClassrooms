@@ -1,6 +1,8 @@
 package com.nnk.springboot.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Required;
 
 import javax.persistence.*;
@@ -39,4 +41,13 @@ public class BidList {
     private String dealType;
     private String sourceListId;
     private String side;
+
+    public BidList() {
+    }
+
+    public BidList(String account, String type, Double bidQuantity) {
+        this.account = account;
+        this.type = type;
+        this.bidQuantity = bidQuantity;
+    }
 }

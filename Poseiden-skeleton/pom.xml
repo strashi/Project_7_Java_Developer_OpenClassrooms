@@ -74,7 +74,40 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<!-- plugin Jacoco necessaire pour rapport-->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.7</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>jacoco-report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- fin plugin Jacoco necessaire pour rapport-->
 		</plugins>
 	</build>
+
+	<reporting>
+		<plugins>
+			<!-- necessaire pour rapport Jacoco -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.7</version>
+			</plugin>
+			<!--fin  necessaire pour rapport Jacoco -->
+		</plugins>
+	</reporting>
 
 </project>
