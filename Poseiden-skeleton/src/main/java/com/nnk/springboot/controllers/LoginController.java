@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginController {
 
     @Autowired
-
     private UserRepository userRepository;
 
     @GetMapping("login")

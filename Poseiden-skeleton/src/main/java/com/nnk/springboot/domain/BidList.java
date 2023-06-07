@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 
 @Data
 @Entity
-@Table(name = "bidlist")
+@Table(name = "bid_list")
 public class BidList {
     // TODO: Map columns in data table BIDLIST with corresponding java fields
 
