@@ -35,11 +35,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("*/list").hasAnyAuthority("USER")
                 .antMatchers("*/add","*/update").hasAnyAuthority("ADMIN")
-                .antMatchers("/login","/","/user/list").permitAll()
+                .antMatchers("/login","/","/user/*").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 //.loginPage("/login")
+                .defaultSuccessUrl("/bidList/list",true)
                 .and()
                 .logout()
                 .permitAll();

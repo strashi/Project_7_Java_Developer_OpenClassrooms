@@ -14,6 +14,7 @@ import java.util.Collection;
 public class User implements UserDetails{
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name="Id", nullable = false, unique = true)
     private Integer id;
     @NotBlank(message = "Username is mandatory")
     private String username;
