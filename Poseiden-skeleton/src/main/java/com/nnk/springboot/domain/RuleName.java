@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 import java.sql.Timestamp;
 @Data
 @Entity
-@Table(name = "rule_name")
+@Table(name = "rule_names")
 public class RuleName {
     // TODO: Map columns in data table RULENAME with corresponding java fields
     @Id

@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 
 @Data
 @Entity
-@Table(name = "trade")
+@Table(name = "trades")
 public class Trade {
     // TODO: Map columns in data table TRADE with corresponding java fields
     @Id
