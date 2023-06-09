@@ -16,6 +16,7 @@ public class CurvePoint {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
+    @NotNull(message = "must not be null")
     private Integer curveId;
     private Timestamp asOfDate;
     private Double term;
