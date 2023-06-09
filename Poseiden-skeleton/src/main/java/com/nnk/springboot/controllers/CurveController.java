@@ -59,6 +59,7 @@ public class CurveController {
         if(result.hasErrors()){
             return "curvePoint/update";
         }
+        curvePoint.setId(id);
         curvePointRepository.save(curvePoint);
         model.addAttribute("curvePoints", curvePointRepository.findAll());
         return "redirect:/curvePoint/list";
@@ -67,7 +68,8 @@ public class CurveController {
     @GetMapping("/curvePoint/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
         // TODO: Find Curve by Id and delete the Curve, return to Curve list
-        curvePointRepository.deleteById(id);
+        CurvePoint curvePoint = curvePointRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid id"+ id));
+        curvePointRepository.delete(curvePoint);
         model.addAttribute("curvePoints", curvePointRepository.findAll());
         return "redirect:/curvePoint/list";
     }

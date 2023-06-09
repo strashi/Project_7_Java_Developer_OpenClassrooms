@@ -60,6 +60,7 @@ public class BidListController {
         if(result.hasErrors()){
             return "bidList/update";
         }
+        bidList.setBidListId(id);
         bidListRepository.save(bidList);
         model.addAttribute("bidlists", bidListRepository.findAll());
         return "redirect:/bidList/list";
@@ -68,7 +69,8 @@ public class BidListController {
     @GetMapping("/bidList/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
         // TODO: Find Bid by Id and delete the bid, return to Bid list
-        bidListRepository.deleteById(id);
+        BidList bid = bidListRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid BidListId"+ id));
+        bidListRepository.delete(bid);
         model.addAttribute("bidlists", bidListRepository.findAll());
         return "redirect:/bidList/list";
     }
