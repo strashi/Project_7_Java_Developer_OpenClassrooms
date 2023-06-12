@@ -1,11 +1,13 @@
 package com.nnk.springboot.domain;
 
+import com.nnk.springboot.tools.ValidPassword;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Collection;
 
@@ -18,6 +20,7 @@ public class User implements UserDetails{
     private Integer id;
     @NotBlank(message = "Username is mandatory")
     private String username;
+    @ValidPassword
     @NotBlank(message = "Password is mandatory")
     private String password;
     @NotBlank(message = "FullName is mandatory")
