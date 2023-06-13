@@ -1,6 +1,7 @@
 package com.nnk.springboot.domain;
 
 import com.nnk.springboot.tools.ValidPassword;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,6 +14,7 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "users")
+@NoArgsConstructor
 public class User implements UserDetails{
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -27,6 +29,13 @@ public class User implements UserDetails{
     private String fullname;
     @NotBlank(message = "Role is mandatory")
     private String role;
+
+    public User(String username, String password, String fullname, String role) {
+        this.username = username;
+        this.password = password;
+        this.fullname = fullname;
+        this.role = role;
+    }
 
     public Integer getId() {
         return id;
