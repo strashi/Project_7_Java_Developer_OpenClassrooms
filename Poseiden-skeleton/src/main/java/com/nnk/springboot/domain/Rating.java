@@ -22,10 +22,13 @@ public class Rating {
     public Rating() {
     }
 
-    public Rating(String moodysRating, String sandPRating, String fitchRating, Integer orderNumber) {
+    public Rating(Integer id, String moodysRating, String sandPRating, String fitchRating, Integer orderNumber) {
+        this.id = id;
         this.moodysRating = moodysRating;
         this.sandPRating = sandPRating;
         this.fitchRating = fitchRating;
         this.orderNumber = orderNumber;
     }
+
+
 }

@@ -38,8 +38,11 @@ public class Trade {
     public Trade() {
     }
 
-    public Trade(String account, String type) {
+    public Trade(Integer tradeId, String account, String type) {
+        this.tradeId = tradeId;
         this.account = account;
         this.type = type;
     }
+
+
 }

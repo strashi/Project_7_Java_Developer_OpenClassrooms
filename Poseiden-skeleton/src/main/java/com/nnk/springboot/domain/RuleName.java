@@ -23,7 +23,8 @@ public class RuleName {
     public RuleName() {
     }
 
-    public RuleName(String name, String description, String json, String template, String sqlStr, String sqlPart) {
+    public RuleName(Integer id, String name, String description, String json, String template, String sqlStr, String sqlPart) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.json = json;
@@ -31,4 +32,6 @@ public class RuleName {
         this.sqlStr = sqlStr;
         this.sqlPart = sqlPart;
     }
+
+
 }

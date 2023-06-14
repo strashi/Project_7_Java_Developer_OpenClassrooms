@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 public class BidTests {
 
-	@Mock
+	@MockBean
 	private BidListRepository bidListRepository;
 
 	@Autowired
@@ -44,24 +45,16 @@ public class BidTests {
 		Assert.assertEquals(bid.getBidQuantity(), 20d, 20d);
 
 		// Find
-		BidList bid2 = new BidList(2,"Account Test2", "Type Test2", 30d);
 		List<BidList> listTest = new ArrayList<>();
 		listTest.add(bid);
-		listTest.add(bid2);
 		when(bidListRepository.findAll()).thenReturn(listTest);
 		List<BidList> listResult = bidListService.findAll();
 		Assert.assertTrue(listResult.size() > 0);
 
 		// Delete
-		//Integer id = bid.getBidListId();
-		//when(bidListRepository.findById(id)).thenReturn(Optional.of(bid));
-		BidList bidon = new BidList(2,"Account Test2", "Type Test2", 30d);
-		doNothing().when(bidListRepository).delete(any(BidList.class));
-		bidListService.delete(bidon);
+		doNothing().when(bidListRepository).delete(bid);
+		bidListService.delete(bid);
 
-
-		//Optional<BidList> bidList = bidListService.findById(id);
-		//Assert.assertFalse(bidList.isPresent());
-		verify(bidListRepository,times(1)).delete(any(BidList.class));
+		verify(bidListRepository,times(1)).delete(bid);
 	}
 }

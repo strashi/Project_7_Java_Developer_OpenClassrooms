@@ -26,9 +26,11 @@ public class CurvePoint {
     public CurvePoint() {
     }
 
-    public CurvePoint(Integer curveId, Double term, Double value) {
+    public CurvePoint(Integer id,Integer curveId, Double term, Double value) {
+        this.id = id;
         this.curveId = curveId;
         this.term = term;
         this.value = value;
     }
+
 }

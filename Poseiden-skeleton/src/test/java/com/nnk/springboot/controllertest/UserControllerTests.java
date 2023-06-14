@@ -1,7 +1,6 @@
 package com.nnk.springboot.controllertest;
 
 import com.nnk.springboot.domain.User;
-import com.nnk.springboot.tools.PasswordConstraintValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -11,7 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.RequestPostProcessor;
 import com.google.gson.Gson;
 
 import javax.validation.ConstraintValidatorContext;
@@ -32,9 +30,6 @@ public class UserControllerTests {
     @Autowired
     private MockMvc mockMvc;
 
-    @Mock
-    private PasswordConstraintValidator passwordConstraintValidator;
-
     @Test
     public void testHome() throws Exception{
 
@@ -48,7 +43,7 @@ public class UserControllerTests {
         mockMvc.perform(get("/user/add")).andExpect(status().isOk()).andDo(print());
 
     }
-
+/*
     @Test
     public void testValidate() throws Exception{
 
@@ -56,9 +51,26 @@ public class UserControllerTests {
 
         Gson gson = new Gson();
         String json = gson.toJson(user);
-        when(passwordConstraintValidator.isValid(any(String.class),any(ConstraintValidatorContext.class))).thenReturn(true);
 
         mockMvc.perform(post("/user/validate").contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isOk()).andDo(print())
+                .andExpect(view().name("redirect:/user/list"));
+
+    }
+*/
+    @Test
+    public void testValidate() throws Exception{
+
+        User user = new User("User","Password22!","user","USER");
+
+        //Gson gson = new Gson();
+        //String json = gson.toJson(user);
+
+        mockMvc.perform(post("/user/validate").contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("username", user.getUsername())
+                .param("password", user.getPassword())
+                .param("fullname", user.getFullname())
+                .param("role", user.getRole()))
                 .andExpect(status().isFound()).andDo(print())
                 .andExpect(view().name("redirect:/user/list"));
 

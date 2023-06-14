@@ -1,6 +1,5 @@
 package com.nnk.springboot.domain;
 
-import com.nnk.springboot.tools.ValidPassword;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -8,22 +7,28 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Collection;
 
 @Entity
 @Table(name = "users")
 @NoArgsConstructor
-public class User implements UserDetails{
+public class User implements UserDetails, Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name="Id", nullable = false, unique = true)
     private Integer id;
     @NotBlank(message = "Username is mandatory")
     private String username;
-    @ValidPassword
+
     @NotBlank(message = "Password is mandatory")
+    @Size(min = 8, message = "Minimum of {min} characters")
+    @Pattern(regexp = ".*[A-Z].*", message = "At least one capital letter")
+    @Pattern(regexp = ".*\\d.*", message = "Add one or more digits")
+    @Pattern(regexp = ".*\\W.*", message = "At least one symbol")
+    @Pattern(regexp = "^\\S+", message = "Password must not contain spaces")
     private String password;
     @NotBlank(message = "FullName is mandatory")
     private String fullname;
