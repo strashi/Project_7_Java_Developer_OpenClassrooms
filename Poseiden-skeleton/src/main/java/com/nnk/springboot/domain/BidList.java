@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Required;
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.sql.Date;
 import java.sql.Timestamp;
 

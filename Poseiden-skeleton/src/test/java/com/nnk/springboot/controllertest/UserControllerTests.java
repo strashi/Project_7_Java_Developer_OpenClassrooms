@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import com.google.gson.Gson;
+
 
 import javax.validation.ConstraintValidatorContext;
 
@@ -43,28 +43,11 @@ public class UserControllerTests {
         mockMvc.perform(get("/user/add")).andExpect(status().isOk()).andDo(print());
 
     }
-/*
+
     @Test
     public void testValidate() throws Exception{
 
         User user = new User("User","Password22!","user","USER");
-
-        Gson gson = new Gson();
-        String json = gson.toJson(user);
-
-        mockMvc.perform(post("/user/validate").contentType(MediaType.APPLICATION_JSON).content(json))
-                .andExpect(status().isOk()).andDo(print())
-                .andExpect(view().name("redirect:/user/list"));
-
-    }
-*/
-    @Test
-    public void testValidate() throws Exception{
-
-        User user = new User("User","Password22!","user","USER");
-
-        //Gson gson = new Gson();
-        //String json = gson.toJson(user);
 
         mockMvc.perform(post("/user/validate").contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("username", user.getUsername())
@@ -73,8 +56,18 @@ public class UserControllerTests {
                 .param("role", user.getRole()))
                 .andExpect(status().isFound()).andDo(print())
                 .andExpect(view().name("redirect:/user/list"));
+    }
+    @Test
+    public void testShowUpdateForm() throws Exception{
 
+        User user = new User(1,"User","Password22!","user","USER");
+        mockMvc.perform(get("/user/update/1"))
+                         .andExpect(status().isFound()).andDo(print());
     }
 
+    @Test
+    public void testUpdate() throws Exception{
+
+    }
 
 }
