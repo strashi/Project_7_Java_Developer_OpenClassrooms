@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
+
 @Controller
 public class CurveController {
     private static final Logger logger = LoggerFactory.getLogger(CurveController.class);
