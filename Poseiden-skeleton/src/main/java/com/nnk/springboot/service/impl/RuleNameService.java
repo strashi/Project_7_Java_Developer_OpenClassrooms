@@ -3,6 +3,7 @@ package com.nnk.springboot.service.impl;
 import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.RuleNameRepository;
+import com.nnk.springboot.service.IRuleNameService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class RuleNameService {
+public class RuleNameService implements IRuleNameService {
 
     private static final Logger logger = LoggerFactory.getLogger(RuleNameService.class);
 

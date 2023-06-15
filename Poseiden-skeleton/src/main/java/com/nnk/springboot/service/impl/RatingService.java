@@ -3,6 +3,7 @@ package com.nnk.springboot.service.impl;
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.RatingRepository;
+import com.nnk.springboot.service.IRatingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class RatingService {
+public class RatingService implements IRatingService {
     private static final Logger logger = LoggerFactory.getLogger(RatingService.class);
 
     @Autowired

@@ -3,6 +3,7 @@ package com.nnk.springboot.service.impl;
 import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.TradeRepository;
+import com.nnk.springboot.service.ITradeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TradeService {
+public class TradeService implements ITradeService {
     private static final Logger logger = LoggerFactory.getLogger(TradeService.class);
 
     @Autowired
@@ -27,7 +28,6 @@ public class TradeService {
             logger.error("Erreur au findAll() de TradeService", e);
             return null;
         }
-
     }
 
     public Trade save(Trade trade) {
@@ -39,7 +39,6 @@ public class TradeService {
             logger.error("Erreur au save() de TradeService", e);
             return null;
         }
-
     }
 
     public Optional<Trade> findById(Integer id) {
@@ -51,8 +50,6 @@ public class TradeService {
             logger.error("Erreur au findById() de TradeService", e);
             return null;
         }
-
-
     }
 
     public void delete(Trade trade) {

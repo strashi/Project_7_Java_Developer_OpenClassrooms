@@ -3,6 +3,8 @@ package com.nnk.springboot.controllers;
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.repositories.RatingRepository;
 import com.nnk.springboot.service.impl.RatingService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,60 +18,98 @@ import javax.validation.Valid;
 
 @Controller
 public class RatingController {
-    // TODO: Inject Rating service
+    private static final Logger logger = LoggerFactory.getLogger(RatingController.class);
 
     @Autowired
     private RatingService ratingService;
 
     @RequestMapping("/rating/list")
-    public String home(Model model)
-    {
-        // TODO: find all Rating, add to model
-        model.addAttribute("ratings", ratingService.findAll());
-        return "rating/list";
+    public String home(Model model) {
+        logger.debug("home() sollicitée de RatingController");
+        try {
+            model.addAttribute("ratings", ratingService.findAll());
+            logger.info("home() effectuée de RatingController");
+            return "rating/list";
+        }catch (Exception e){
+            logger.error("Erreur au home() de RatingController", e);
+            return null;
+        }
     }
 
     @GetMapping("/rating/add")
     public String addRatingForm(Rating rating) {
-        return "rating/add";
+        logger.debug("addRatingForm() sollicitée de RatingController");
+        try {
+            logger.info("addRatingForm() effectuée de RatingController");
+            return "rating/add";
+        }catch (Exception e){
+            logger.error("Erreur au addRatingForm() de RatingController", e);
+            return null;
+        }
     }
 
     @PostMapping("/rating/validate")
     public String validate(@Valid Rating rating, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return Rating list
-        if(!result.hasErrors()){
-            ratingService.save(rating);
-            return "redirect:/rating/list";
+        logger.debug("validate() sollicitée de RatingController");
+        try {
+            if (!result.hasErrors()) {
+                ratingService.save(rating);
+                logger.info("validate() effectuée de RatingController");
+                return "redirect:/rating/list";
 
+            }
+            logger.info("validate() non effectuée de RatingController");
+            return "rating/add";
+        }catch (Exception e){
+            logger.error("Erreur au home() de RatingController", e);
+            return null;
         }
-        return "rating/add";
     }
 
     @GetMapping("/rating/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get Rating by Id and to model then show to the form
-        Rating rating = ratingService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid id "+id));
-        model.addAttribute("rating", rating);
-        return "rating/update";
+        logger.debug("showUpdateForm() sollicitée de RatingController");
+        try {
+            Rating rating = ratingService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid id " + id));
+            model.addAttribute("rating", rating);
+            logger.info("showUpdateForm() effectuée de RatingController");
+            return "rating/update";
+        }catch (Exception e){
+            logger.error("Erreur au showUpdateForm() de RatingController", e);
+            return null;
+        }
     }
 
     @PostMapping("/rating/update/{id}")
     public String updateRating(@PathVariable("id") Integer id, @Valid Rating rating,
                              BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Rating and return Rating list
-        if(result.hasErrors()){
-            return "rating/update";
+        logger.debug("home() sollicitée de RatingController");
+        try {
+            if (result.hasErrors()) {
+                logger.info("updateRating() non effectuée de RatingController");
+                return "rating/update";
+            }
+            rating.setId(id);
+            ratingService.save(rating);
+            logger.info("updateRating() effectuée de RatingController");
+            return "redirect:/rating/list";
+        }catch (Exception e){
+            logger.error("Erreur au updateRating() de RatingController", e);
+            return null;
         }
-        rating.setId(id);
-        ratingService.save(rating);
-        return "redirect:/rating/list";
     }
 
     @GetMapping("/rating/delete/{id}")
     public String deleteRating(@PathVariable("id") Integer id, Model model) {
-        // TODO: Find Rating by Id and delete the Rating, return to Rating list
-        Rating rating = ratingService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid id "+id));
-        ratingService.delete(rating);
-        return "redirect:/rating/list";
+        logger.debug("deleteRating() sollicitée de RatingController");
+        try {
+            Rating rating = ratingService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid id " + id));
+            ratingService.delete(rating);
+            logger.info("deleteRating() effectuée de RatingController");
+            return "redirect:/rating/list";
+        }catch (Exception e){
+            logger.error("Erreur au deleteRating() de RatingController", e);
+            return null;
+        }
     }
 }

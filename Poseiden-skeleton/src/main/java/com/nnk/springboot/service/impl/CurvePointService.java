@@ -3,6 +3,7 @@ package com.nnk.springboot.service.impl;
 import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.CurvePointRepository;
+import com.nnk.springboot.service.ICurvePointService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CurvePointService {
+public class CurvePointService implements ICurvePointService {
     private static final Logger logger = LoggerFactory.getLogger(CurvePointService.class);
 
     @Autowired

@@ -4,6 +4,8 @@ import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.repositories.CurvePointRepository;
 import com.nnk.springboot.service.impl.CurvePointService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,59 +19,98 @@ import javax.validation.Valid;
 
 @Controller
 public class CurveController {
-    // TODO: Inject Curve Point service
+    private static final Logger logger = LoggerFactory.getLogger(CurveController.class);
 
     @Autowired
     private CurvePointService curvePointService;
 
     @RequestMapping("/curvePoint/list")
-    public String home(Model model)
-    {
-        // TODO: find all Curve Point, add to model
-        model.addAttribute("curvePoints", curvePointService.findAll());
-        return "curvePoint/list";
+    public String home(Model model){
+        logger.debug("home() sollicitée de CurveController");
+        try {
+            model.addAttribute("curvePoints", curvePointService.findAll());
+            logger.info("home() effectuée de CurveController");
+            return "curvePoint/list";
+        }catch (Exception e){
+            logger.error("Erreur au home() de CurveController", e);
+            return null;
+        }
     }
 
     @GetMapping("/curvePoint/add")
-    public String addBidForm(CurvePoint bid) {
-        return "curvePoint/add";
+    public String addCurveForm(CurvePoint bid) {
+        logger.debug("addCurveForm() sollicitée de CurveController");
+        try {
+            logger.info("addCurveForm() effectuée de CurveController");
+            return "curvePoint/add";
+        }catch (Exception e){
+            logger.error("Erreur au home() de CurveController", e);
+            return null;
+        }
     }
 
     @PostMapping("/curvePoint/validate")
     public String validate(@Valid CurvePoint curvePoint, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return Curve list
-        if (!result.hasErrors()) {
-            curvePointService.save(curvePoint);
-            return "redirect:/curvePoint/list";
+        logger.debug("home() sollicitée de CurveController");
+        try {
+            if (!result.hasErrors()) {
+                curvePointService.save(curvePoint);
+                logger.info("validate() effectuée de CurveController");
+                return "redirect:/curvePoint/list";
+            }
+            logger.info("validate() non effectuée de CurveController");
+            return "curvePoint/add";
+        }catch (Exception e){
+            logger.error("Erreur au validate() de CurveController", e);
+            return null;
         }
-        return "curvePoint/add";
     }
 
     @GetMapping("/curvePoint/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get CurvePoint by Id and to model then show to the form
-        CurvePoint curvePoint = curvePointService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid id"+ id));
-        model.addAttribute("curvePoint", curvePoint);
-        return "curvePoint/update";
+        logger.debug("showUpdateForm() sollicitée de CurveController");
+        try{
+            CurvePoint curvePoint = curvePointService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid id"+ id));
+            model.addAttribute("curvePoint", curvePoint);
+            logger.info("showUpdateForm() effectuée de CurveController");
+            return "curvePoint/update";
+        }catch (Exception e){
+            logger.error("Erreur au showUpdateForm() de CurveController", e);
+            return null;
+        }
     }
 
     @PostMapping("/curvePoint/update/{id}")
-    public String updateBid(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint,
+    public String updateCurve(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint,
                              BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Curve and return Curve list
-        if(result.hasErrors()){
-            return "curvePoint/update";
+        logger.debug("updateCurve() sollicitée de CurveController");
+        try {
+            if (result.hasErrors()) {
+                logger.info("updateCurve() non effectuée de CurveController");
+                return "curvePoint/update";
+            }
+            curvePoint.setId(id);
+            curvePointService.save(curvePoint);
+            logger.info("updateCurve() effectuée de CurveController");
+            return "redirect:/curvePoint/list";
+        }catch (Exception e){
+            logger.error("Erreur au updateCurve() de CurveController", e);
+            return null;
         }
-        curvePoint.setId(id);
-        curvePointService.save(curvePoint);
-        return "redirect:/curvePoint/list";
+
     }
 
     @GetMapping("/curvePoint/delete/{id}")
-    public String deleteBid(@PathVariable("id") Integer id, Model model) {
-        // TODO: Find Curve by Id and delete the Curve, return to Curve list
-        CurvePoint curvePoint = curvePointService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid id"+ id));
-        curvePointService.delete(curvePoint);
-        return "redirect:/curvePoint/list";
+    public String deleteCurve(@PathVariable("id") Integer id, Model model) {
+        logger.debug("deleteCurve() sollicitée de CurveController");
+        try {
+            CurvePoint curvePoint = curvePointService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid id" + id));
+            curvePointService.delete(curvePoint);
+            logger.info("deleteCurve() effectuée de CurveController");
+            return "redirect:/curvePoint/list";
+        }catch (Exception e){
+            logger.error("Erreur au deleteCurve() de CurveController", e);
+            return null;
+        }
     }
 }
