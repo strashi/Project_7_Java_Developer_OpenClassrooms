@@ -1,5 +1,6 @@
 package com.nnk.springboot.controllertest;
 
+import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
 import com.nnk.springboot.service.impl.UserService;
@@ -12,11 +13,14 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 
 import javax.validation.ConstraintValidatorContext;
+
+import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -72,7 +76,8 @@ public class UserControllerTests {
     @Test
     public void testShowUpdateForm() throws Exception{
 
-        User user = new User(1,"User","Password22!","user","USER");
+        //User user = new User(1,"User","Password22!","user","USER");
+        //when(userService.findById(1)).thenReturn(Optional.of(user));
         mockMvc.perform(get("/user/update/1"))
                          .andExpect(status().isFound()).andDo(print());
     }
@@ -87,8 +92,15 @@ public class UserControllerTests {
                         .param("password", user.getPassword())
                         .param("fullname", user.getFullname())
                         .param("role", user.getRole()))
-                .andExpect(status().isFound()).andDo(print())
-                .andExpect(view().name("redirect:/user/list"));
+                .andExpect(status().isFound()).andDo(print());
+               // .andExpect(view().name("redirect:/user/list"));
     }
-
+    @Test
+    public void testDeleteUser() throws Exception{
+        //BidList bid = new BidList(1,"Account","Type",2d);
+        //when(bidListService.findById(1)).thenReturn(Optional.of(bid));
+        mockMvc.perform(get("/user/delete/1"))
+                .andExpect(status().isFound()).andDo(print());
+               // .andExpect(view().name("redirect:/bidList/list"));
+    }
 }

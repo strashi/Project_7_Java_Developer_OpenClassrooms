@@ -26,8 +26,6 @@ public class BidListController {
     private static final Logger logger = LoggerFactory.getLogger(BidListController.class);
 
     @Autowired
-    private BidListRepository bidListRepository;
-    @Autowired
     private BidListService bidListService;
 
     @RequestMapping("/bidList/list")
