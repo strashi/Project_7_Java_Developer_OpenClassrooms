@@ -13,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -60,7 +61,6 @@ public class UserControllerTests {
 
         User user = new User("User","Password22!","user","USER");
 
-      //  doNothing().when(userService).save(any(User.class));
         when(userService.save(any(User.class))).thenReturn(null);
 
         mockMvc.perform(post("/user/validate").contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -70,16 +70,14 @@ public class UserControllerTests {
                 .param("role", user.getRole()))
                 .andExpect(status().isFound()).andDo(print())
                 .andExpect(view().name("redirect:/user/list"));
-
-       // verify(userService, times(1)).save(any(User.class));
     }
     @Test
     public void testShowUpdateForm() throws Exception{
 
-        //User user = new User(1,"User","Password22!","user","USER");
-        //when(userService.findById(1)).thenReturn(Optional.of(user));
+        User user = new User(1,"User","Password22!","user","USER");
+        when(userService.findById(1)).thenReturn(Optional.of(user));
         mockMvc.perform(get("/user/update/1"))
-                         .andExpect(status().isFound()).andDo(print());
+                         .andExpect(status().isOk()).andDo(print());
     }
 
     @Test
@@ -92,15 +90,15 @@ public class UserControllerTests {
                         .param("password", user.getPassword())
                         .param("fullname", user.getFullname())
                         .param("role", user.getRole()))
-                .andExpect(status().isFound()).andDo(print());
-               // .andExpect(view().name("redirect:/user/list"));
+                .andExpect(status().isFound()).andDo(print())
+                .andExpect(view().name("redirect:/user/list"));
     }
     @Test
     public void testDeleteUser() throws Exception{
-        //BidList bid = new BidList(1,"Account","Type",2d);
-        //when(bidListService.findById(1)).thenReturn(Optional.of(bid));
+        User user = new User(1,"User","Password22!","user","USER");
+        when(userService.findById(1)).thenReturn(Optional.of(user));
         mockMvc.perform(get("/user/delete/1"))
-                .andExpect(status().isFound()).andDo(print());
-               // .andExpect(view().name("redirect:/bidList/list"));
+                .andExpect(status().isFound()).andDo(print())
+                .andExpect(view().name("redirect:/user/list"));
     }
 }

@@ -56,7 +56,7 @@ public class TradeController {
             if (!result.hasErrors()) {
                 tradeService.save(trade);
                 logger.info("validate() effectuée de TradeController");
-                return "redirect:/rating/list";
+                return "redirect:/trade/list";
 
             }
             logger.info("validate() non effectuée de TradeController");
