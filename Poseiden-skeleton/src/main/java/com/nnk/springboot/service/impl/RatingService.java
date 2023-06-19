@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * Implementation of service for rating
+ */
 @Service
 public class RatingService implements IRatingService {
     private static final Logger logger = LoggerFactory.getLogger(RatingService.class);

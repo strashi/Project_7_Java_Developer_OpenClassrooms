@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-
+/**
+ * Implementation of the controller for ruleName
+ */
 @Controller
 public class RuleNameController {
     private static final Logger logger = LoggerFactory.getLogger(RuleNameController.class);

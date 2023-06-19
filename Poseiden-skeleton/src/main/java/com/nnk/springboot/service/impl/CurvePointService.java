@@ -11,15 +11,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * Implementation of service for curvePoint
+ */
 @Service
 public class CurvePointService implements ICurvePointService {
     private static final Logger logger = LoggerFactory.getLogger(CurvePointService.class);
 
     @Autowired
     private CurvePointRepository curvePointRepository;
-
-
 
     public List<CurvePoint> findAll() {
         logger.debug("findAll() sollicité de CurvePointService");

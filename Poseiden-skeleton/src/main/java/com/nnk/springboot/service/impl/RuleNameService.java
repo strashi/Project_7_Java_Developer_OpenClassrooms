@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * Implementation of service for ruleName
+ */
 @Service
 public class RuleNameService implements IRuleNameService {
 

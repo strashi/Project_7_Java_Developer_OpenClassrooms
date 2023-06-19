@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * Implementation of service for trade
+ */
 @Service
 public class TradeService implements ITradeService {
     private static final Logger logger = LoggerFactory.getLogger(TradeService.class);

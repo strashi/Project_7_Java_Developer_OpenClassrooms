@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-
+/**
+ * Implementation of the controller for rating
+ */
 @Controller
 public class RatingController {
     private static final Logger logger = LoggerFactory.getLogger(RatingController.class);

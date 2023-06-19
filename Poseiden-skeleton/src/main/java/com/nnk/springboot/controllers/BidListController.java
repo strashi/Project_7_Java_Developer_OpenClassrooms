@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 import java.util.List;
 
-
+/**
+ * Implementation of the controller for bidlist
+ */
 @Controller
 public class BidListController {
     private static final Logger logger = LoggerFactory.getLogger(BidListController.class);

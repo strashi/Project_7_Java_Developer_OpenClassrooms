@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
+/**
+ * Implementation of the controller for login
+ */
 @Controller
 @RequestMapping("app")
 public class LoginController {

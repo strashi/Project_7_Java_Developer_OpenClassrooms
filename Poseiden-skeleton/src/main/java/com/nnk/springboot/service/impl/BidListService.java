@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * Implementation of service for bidlist
+ */
 @Service
 public class BidListService implements IBidListService {
     private static final Logger logger = LoggerFactory.getLogger(BidListService.class);

@@ -11,7 +11,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-
+/**
+ * Implementation of the controller for user
+ */
 
 @Controller
 public class UserController {

@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-
+/**
+ * Implementation of the controller for trade
+ */
 @Controller
 public class TradeController {
     private static final Logger logger = LoggerFactory.getLogger(TradeController.class);

@@ -15,6 +15,12 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
+/**
+ * Implementation of the security configuration
+ *
+ */
+
+
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -39,7 +45,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                //.loginPage("/login")
                 .defaultSuccessUrl("/bidList/list",true)
                 .and()
                 .logout()
