@@ -3,6 +3,7 @@ package com.nnk.springboot.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
@@ -17,6 +18,7 @@ public class Rating {
     private String moodysRating;
     private String sandPRating;
     private String fitchRating;
+    @Digits(integer = 10, fraction = 2)
     private Integer orderNumber;
 
     public Rating() {

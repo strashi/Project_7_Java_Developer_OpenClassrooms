@@ -3,6 +3,7 @@ package com.nnk.springboot.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import java.sql.Timestamp;
 
@@ -16,9 +17,13 @@ public class Trade {
     private Integer tradeId;
     private String account;
     private String type;
+    @Digits(integer = 10, fraction = 2)
     private Double buyQuantity;
+    @Digits(integer = 10, fraction = 2)
     private Double sellQuantity;
+    @Digits(integer = 10, fraction = 2)
     private Double buyPrice;
+    @Digits(integer = 10, fraction = 2)
     private Double sellPrice;
     private String benchmark;
     private Timestamp tradeDate;

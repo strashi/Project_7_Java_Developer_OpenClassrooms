@@ -26,7 +26,6 @@ public class BidList {
     @NotBlank(message = "Type is mandatory")
     private String type;
 
-    //@Pattern(regexp = "^\\d{10}$")
     @Digits(integer = 10, fraction = 2)
     private Double bidQuantity;
     private Double askQuantity;
