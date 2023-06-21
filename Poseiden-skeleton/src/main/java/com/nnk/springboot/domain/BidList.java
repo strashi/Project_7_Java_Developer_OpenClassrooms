@@ -28,8 +28,11 @@ public class BidList {
 
     @Digits(integer = 10, fraction = 2)
     private Double bidQuantity;
+    @Digits(integer = 10, fraction = 2)
     private Double askQuantity;
+    @Digits(integer = 10, fraction = 2)
     private Double bid;
+    @Digits(integer = 10, fraction = 2)
     private Double ask;
     private String benchmark;
     private Timestamp bidListDate;
