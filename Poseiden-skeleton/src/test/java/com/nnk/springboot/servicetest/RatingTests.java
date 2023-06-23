@@ -51,6 +51,12 @@ public class RatingTests {
 		List<Rating> listResult = ratingService.findAll();
 		Assert.assertTrue(listResult.size() > 0);
 
+		// FindById
+		Optional<Rating> optRating = Optional.of(rating);
+		when(ratingRepository.findById(1)).thenReturn(optRating);
+		Optional<Rating> optRatingTest = ratingService.findById(1);
+		Assert.assertSame(optRating,optRatingTest);
+
 		// Delete
 		doNothing().when(ratingRepository).delete(rating);
 		ratingService.delete(rating);

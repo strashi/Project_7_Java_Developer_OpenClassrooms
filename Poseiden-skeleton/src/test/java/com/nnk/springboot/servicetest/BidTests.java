@@ -51,6 +51,12 @@ public class BidTests {
 		List<BidList> listResult = bidListService.findAll();
 		Assert.assertTrue(listResult.size() > 0);
 
+		// FindById
+		Optional<BidList> optBid = Optional.of(bid);
+		when(bidListRepository.findById(1)).thenReturn(optBid);
+		Optional<BidList> optBidTest = bidListService.findById(1);
+		Assert.assertSame(optBid,optBidTest);
+
 		// Delete
 		doNothing().when(bidListRepository).delete(bid);
 		bidListService.delete(bid);

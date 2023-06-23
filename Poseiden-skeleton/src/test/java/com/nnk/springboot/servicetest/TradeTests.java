@@ -50,6 +50,12 @@ public class TradeTests {
 		List<Trade> listResult = tradeService.findAll();
 		Assert.assertTrue(listResult.size() > 0);
 
+		// FindById
+		Optional<Trade> optTrade = Optional.of(trade);
+		when(tradeRepository.findById(1)).thenReturn(optTrade);
+		Optional<Trade> optTradeTest = tradeService.findById(1);
+		Assert.assertSame(optTrade,optTradeTest);
+
 		// Delete
 		doNothing().when(tradeRepository).delete(trade);
 		tradeService.delete(trade);

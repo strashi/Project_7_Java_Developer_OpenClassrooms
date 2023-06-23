@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
@@ -50,6 +51,12 @@ public class UserTests {
         when(userRepository.findAll()).thenReturn(listTest);
         List<User> listResult = userService.findAll();
         Assert.assertTrue(listResult.size() > 0);
+
+        // FindById
+        Optional<User> optUser = Optional.of(user);
+        when(userRepository.findById(1)).thenReturn(optUser);
+        Optional<User> optUserTest = userService.findById(1);
+        Assert.assertSame(optUser,optUserTest);
 
         // Delete
         doNothing().when(userRepository).delete(user);

@@ -51,6 +51,12 @@ public class RuleTests {
 		List<RuleName> listResult = ruleNameService.findAll();
 		Assert.assertTrue(listResult.size() > 0);
 
+		// FindById
+		Optional<RuleName> optRule = Optional.of(rule);
+		when(ruleNameRepository.findById(1)).thenReturn(optRule);
+		Optional<RuleName> optRuleTest = ruleNameService.findById(1);
+		Assert.assertSame(optRule,optRuleTest);
+
 		// Delete
 		doNothing().when(ruleNameRepository).delete(rule);
 		ruleNameService.delete(rule);

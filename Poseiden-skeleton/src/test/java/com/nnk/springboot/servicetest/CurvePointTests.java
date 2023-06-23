@@ -1,5 +1,6 @@
 package com.nnk.springboot.servicetest;
 
+import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.repositories.CurvePointRepository;
 import com.nnk.springboot.service.impl.CurvePointService;
@@ -50,6 +51,12 @@ public class CurvePointTests {
 		when(curvePointRepository.findAll()).thenReturn(listTest);
 		List<CurvePoint> listResult = curvePointService.findAll();
 		Assert.assertTrue(listResult.size() > 0);
+
+		// FindById
+		Optional<CurvePoint> optCurvePoint = Optional.of(curvePoint);
+		when(curvePointRepository.findById(1)).thenReturn(optCurvePoint);
+		Optional<CurvePoint>optCurvePointTest = curvePointService.findById(1);
+		Assert.assertSame(optCurvePoint,optCurvePointTest);
 
 		// Delete
 		doNothing().when(curvePointRepository).delete(curvePoint);
