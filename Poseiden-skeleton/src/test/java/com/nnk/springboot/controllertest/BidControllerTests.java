@@ -20,8 +20,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -37,6 +36,11 @@ public class BidControllerTests {
     @WithMockUser(username = "user", password = "Password22!", authorities= {"USER"})
     public void testHome() throws Exception{
         mockMvc.perform(get("/bidList/list")).andExpect(status().isOk()).andDo(print());
+    }
+    @Test
+    public void testHomeWithoutAuthentication() throws Exception{
+        mockMvc.perform(get("/bidList/list")).andExpect(status().isFound()).andDo(print())
+                .andExpect(redirectedUrl("http://localhost/login"));
     }
 
     @Test
